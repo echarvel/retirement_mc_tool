@@ -47,9 +47,10 @@ No test suite or linter is configured. Output goes to `outputs/YYYYMMDD_HHMMSS/`
 
 ### Helper Patterns
 - `take_from(account_array, amount_array)`: In-place withdrawal across all paths with remainder tracking
-- `amortize()`: Computes annual loan payment from principal/rate/term
-- Returns are i.i.d. normal, clipped at -99%
+- `amort_payment()`: Computes annual loan payment from principal/rate/term
+- `generate_returns()`: i.i.d. normal returns, clipped at -99%. Extension point for alternative return models
+- Returns are seeded via `SEED` for reproducibility
 
 ## Configuration
 
-All config lives in `.env` (see `.env.example` and `env.example` for documented defaults). Key parameter groups: returns, optimization bounds, income/SS, spending floor, reserve policy, guardrails thresholds, reverse mortgage, equity loan. Detailed model documentation is in `SIMULATION_MODEL.md`.
+All config lives in `.env` (see `.env.example` for a working template, `env.example` for heavily commented documentation of each parameter). Key parameter groups: returns, optimization bounds, income/SS, spending floor, reserve policy, guardrails thresholds, reverse mortgage, equity loan. `OPTIMIZE_SUCCESS_METRIC` selects the objective for binary search: `death_weighted` (default), `age_99`, `both_min`, or `both_weighted`. Detailed model documentation is in `SIMULATION_MODEL.md`.
